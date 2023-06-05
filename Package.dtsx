@@ -1,0 +1,3224 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/4/2023 8:21:46 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-CO8LP72"
+  DTS:CreatorName="DESKTOP-CO8LP72\diego"
+  DTS:DTSID="{9EE554B6-A585-4933-9F56-68F95884FBAF}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5035.3"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="27"
+  DTS:VersionGUID="{F306035C-BBF0-4DF9-8DAA-2324DE5FFDB3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Data Connection]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E738DC7A-AA0D-4E20-8FB1-7A22ADA4901F}"
+      DTS:ObjectName="Data Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Initial Catalog=RETAIL;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{E738DC7A-AA0D-4E20-8FB1-7A22ADA4901F}Data Connection;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Data Connection - RETAIL.RETAIL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AE984234-7BB5-4619-8689-DB3CD87C42C4}"
+      DTS:ObjectName="Data Connection - RETAIL.RETAIL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=Data Connection - RETAIL;Initial Catalog=RETAIL;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{AE984234-7BB5-4619-8689-DB3CD87C42C4}Data Connection - RETAIL.RETAIL;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Data Connection1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{284D8DE5-C559-42E6-BF59-0E0C4F9FCF67}"
+      DTS:ObjectName="Data Connection1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{284D8DE5-C559-42E6-BF59-0E0C4F9FCF67}Data Connection1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Data Connection1 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C5AB869B-92E9-4651-974A-B9FFD54E17DF}"
+      DTS:ObjectName="Data Connection1 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Initial Catalog=PARCIAL;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package-{C5AB869B-92E9-4651-974A-B9FFD54E17DF}Data Connection1 1;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task - DIM Bancos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E50BC30D-E13C-4F7D-BBAE-37DA82A61190}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task - DIM Bancos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task - DIM Bancos\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Dim_Bancos]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Dim_Bancos]) [refTable]
+where [refTable].[banco_key] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="banco_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="id_cuenta" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="numero_cuenta" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_cuenta" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="moneda_cuenta" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="linea_credito" dataType="DT_NUMERIC" length="0" precision="18" scale="5" codePage="0"/&gt;&lt;referenceColumn name="id_banco" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="codigo_banco" dataType="DT_STR" length="3" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="nombre_banco" dataType="DT_STR" length="60" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="propiedad" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_cuenta_banco]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Bancos\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input].Columns[id_cuenta_banco]"
+                      cachedDataType="i4"
+                      cachedName="id_cuenta_banco"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_cuenta_banco]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">banco_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Bancos]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id_banco]"
+                      cachedDataType="i4"
+                      cachedName="id_banco"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_banco]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_banco]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codigo_banco]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="codigo_banco"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[codigo_banco]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[codigo_banco]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[nombre_banco]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="nombre_banco"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre_banco]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_banco]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[numero_cuenta]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="numero_cuenta"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[numero_cuenta]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[numero_cuenta]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[nombre_cuenta]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="nombre_cuenta"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre_cuenta]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_cuenta]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[propiedad]"
+                      cachedDataType="i2"
+                      cachedName="propiedad"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[propiedad]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[propiedad]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[moneda_cuenta]"
+                      cachedDataType="i4"
+                      cachedName="moneda_cuenta"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[moneda_cuenta]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_cuenta]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[linea_credito]"
+                      cachedDataType="numeric"
+                      cachedName="linea_credito"
+                      cachedPrecision="18"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[linea_credito]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[linea_credito]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id_cuenta_banco]"
+                      cachedDataType="i4"
+                      cachedName="id_cuenta_banco"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_cuenta]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_cuenta_banco]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[banco_key]"
+                      dataType="i4"
+                      name="banco_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_cuenta]"
+                      dataType="i4"
+                      name="id_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[numero_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="numero_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombre_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[moneda_cuenta]"
+                      dataType="i4"
+                      name="moneda_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[linea_credito]"
+                      dataType="numeric"
+                      name="linea_credito"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_banco]"
+                      dataType="i4"
+                      name="id_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[codigo_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="codigo_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="nombre_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[propiedad]"
+                      dataType="i2"
+                      name="propiedad" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Bancos\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
+	-- Campos Cuenta Banco
+	cb.cuentaBanco id_cuenta_banco,
+	cb.numeroCta numero_cuenta,
+	cb.nombreCta nombre_cuenta,
+	cb.monedaCta moneda_cuenta,
+	cb.lineaCredito linea_credito,
+	-- Campos Banco
+	ba.banco id_banco,
+	ba.codigoBanco codigo_banco,
+	ba.nombreBanco nombre_banco,
+	ba.propiedad propiedad
+FROM RETAIL.pa.pago pa
+JOIN RETAIL.ma.formaPago fp ON fp.formaPago = pa.formaPago
+JOIN RETAIL.ma.vendedor ve ON ve.vendedor = pa.vendedor
+JOIN RETAIL.ma.cuentaBanco cb ON cb.cuentaBanco = pa.cuentaBanco
+JOIN RETAIL.ma.banco ba ON ba.banco = cb.banco
+ORDER BY id_cuenta_banco
+;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_banco]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_banco]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_banco]"
+                      name="id_banco"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[codigo_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[codigo_banco]"
+                      length="3"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[codigo_banco]"
+                      name="codigo_banco"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre_banco]"
+                      length="60"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_banco]"
+                      name="nombre_banco"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_cuenta_banco]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_cuenta_banco]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_cuenta_banco]"
+                      name="id_cuenta_banco"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[numero_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[numero_cuenta]"
+                      length="50"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[numero_cuenta]"
+                      name="numero_cuenta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre_cuenta]"
+                      length="50"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre_cuenta]"
+                      name="nombre_cuenta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[propiedad]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[propiedad]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[propiedad]"
+                      name="propiedad"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_cuenta]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[moneda_cuenta]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_cuenta]"
+                      name="moneda_cuenta"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[linea_credito]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[linea_credito]"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].Columns[linea_credito]"
+                      name="linea_credito"
+                      precision="18"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_banco]"
+                      dataType="i4"
+                      name="id_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[codigo_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="codigo_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="nombre_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_cuenta_banco]"
+                      dataType="i4"
+                      name="id_cuenta_banco" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[numero_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="numero_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombre_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[propiedad]"
+                      dataType="i2"
+                      name="propiedad" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[moneda_cuenta]"
+                      dataType="i4"
+                      name="moneda_cuenta" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[linea_credito]"
+                      dataType="numeric"
+                      name="linea_credito"
+                      precision="18"
+                      scale="5" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_banco]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_banco]"
+                      name="id_banco" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[codigo_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[codigo_banco]"
+                      name="codigo_banco" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre_banco]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre_banco]"
+                      name="nombre_banco" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[propiedad]"
+                      dataType="i2"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[propiedad]"
+                      name="propiedad" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_cuenta_banco]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_cuenta_banco]"
+                      name="id_cuenta_banco" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[numero_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[numero_cuenta]"
+                      name="numero_cuenta" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre_cuenta]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre_cuenta]"
+                      name="nombre_cuenta" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[moneda_cuenta]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[moneda_cuenta]"
+                      name="moneda_cuenta" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[linea_credito]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[linea_credito]"
+                      name="linea_credito"
+                      precision="18"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task - DIM Bancos.Paths[Lookup No Match Output]"
+              endId="Package\Data Flow Task - DIM Bancos\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task - DIM Bancos\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task - DIM Bancos.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task - DIM Bancos\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task - DIM Bancos\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task - DIM Formas Pago"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{449591b1-af60-45b0-b70c-45ef222da7fc}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task - DIM Formas Pago"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task - DIM Formas Pago\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Dim_FormasPago]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Dim_FormasPago]) [refTable]
+where [refTable].[forma_pago_key] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="forma_pago_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="id_forma_pago" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="60" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="tipo" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_forma_pago]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input].Columns[id_forma_pago]"
+                      cachedDataType="i4"
+                      cachedName="id_forma_pago"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_forma_pago]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">forma_pago_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_FormasPago]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id_forma_pago]"
+                      cachedDataType="i4"
+                      cachedName="id_forma_pago"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_forma_pago]"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_forma_pago]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[tipo]"
+                      cachedDataType="i4"
+                      cachedName="tipo"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tipo]"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[tipo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forma_pago_key]"
+                      dataType="i4"
+                      name="forma_pago_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_forma_pago]"
+                      dataType="i4"
+                      name="id_forma_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tipo]"
+                      dataType="i4"
+                      name="tipo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
+	-- Campos FormaPago
+	fp.formaPago id_forma_pago,
+	fp.nombreFormaPago nombre,
+	fp.tipoFormaPago tipo
+FROM RETAIL.pa.pago pa
+JOIN RETAIL.ma.formaPago fp ON fp.formaPago = pa.formaPago
+JOIN RETAIL.ma.vendedor ve ON ve.vendedor = pa.vendedor
+JOIN RETAIL.ma.cuentaBanco cb ON cb.cuentaBanco = pa.cuentaBanco
+JOIN RETAIL.ma.banco ba ON ba.banco = cb.banco
+ORDER BY id_forma_pago
+;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_forma_pago]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_forma_pago]"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_forma_pago]"
+                      name="id_forma_pago"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre]"
+                      length="60"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]"
+                      name="nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[tipo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tipo]"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].Columns[tipo]"
+                      name="tipo"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_forma_pago]"
+                      dataType="i4"
+                      name="id_forma_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tipo]"
+                      dataType="i4"
+                      name="tipo" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_forma_pago]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_forma_pago]"
+                      name="id_forma_pago" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tipo]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tipo]"
+                      name="tipo" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task - DIM Formas Pago.Paths[Lookup No Match Output]"
+              endId="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task - DIM Formas Pago\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task - DIM Formas Pago.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task - DIM Formas Pago\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task - DIM Formas Pago\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task - DIM Vendedores"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6b3c046b-4bf0-4948-a19f-465481e07c3b}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task - DIM Vendedores"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task - DIM Vendedores\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Dim_Vendedores]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[Dim_Vendedores]) [refTable]
+where [refTable].[id_vendedor] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="vendedor_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="id_vendedor" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="nombre" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_vendedor]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Vendedores\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input].Columns[id_vendedor]"
+                      cachedDataType="i4"
+                      cachedName="id_vendedor"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_vendedor]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">id_vendedor</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Vendedores]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[nombre]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="60"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id_vendedor]"
+                      cachedDataType="i4"
+                      cachedName="id_vendedor"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_vendedor]"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_vendedor]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="60"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vendedor_key]"
+                      dataType="i4"
+                      name="vendedor_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_vendedor]"
+                      dataType="i4"
+                      name="id_vendedor" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
+	-- Campos Vendedor
+	ve.vendedor id_vendedor,
+	ve.nombreVendedor nombre
+FROM RETAIL.pa.pago pa
+JOIN RETAIL.ma.formaPago fp ON fp.formaPago = pa.formaPago
+JOIN RETAIL.ma.vendedor ve ON ve.vendedor = pa.vendedor
+JOIN RETAIL.ma.cuentaBanco cb ON cb.cuentaBanco = pa.cuentaBanco
+JOIN RETAIL.ma.banco ba ON ba.banco = cb.banco
+ORDER BY id_vendedor
+;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre]"
+                      length="60"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[nombre]"
+                      name="nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_vendedor]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_vendedor]"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_vendedor]"
+                      name="id_vendedor"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_vendedor]"
+                      dataType="i4"
+                      name="id_vendedor" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_vendedor]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_vendedor]"
+                      name="id_vendedor" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task - DIM Vendedores.Paths[Lookup No Match Output]"
+              endId="Package\Data Flow Task - DIM Vendedores\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task - DIM Vendedores\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task - DIM Vendedores.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task - DIM Vendedores\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task - DIM Vendedores\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task - FACT Pagos"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{57B6E816-4B50-48F3-B87F-FCF810C1BAC3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task - FACT Pagos"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task - FACT Pagos\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+	-- Campos Pago
+	pg.id_pago,
+	-- Campos Vendedor
+	ve.vendedor_key,
+	-- Campos Forma Pago
+	fp.forma_pago_key,
+	-- Campos Banco
+	bc.banco_key,
+	-- Campo Tiempo
+	tp.tiempo_key
+FROM PARCIAL.dbo.Fact_Pagos pg
+JOIN PARCIAL.dbo.Dim_Bancos bc ON pg.banco_key = bc.banco_key
+JOIN PARCIAL.dbo.Dim_FormasPago fp ON pg.forma_pago_key = fp.forma_pago_key
+JOIN PARCIAL.dbo.Dim_Vendedores ve ON pg.vendedor_key = ve.vendedor_key
+JOIN PARCIAL.dbo.DIM_TIEMPO tp ON pg.tiempo_key = tp.tiempo_key
+;</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT 
+	-- Campos Pago
+	pg.id_pago,
+	-- Campos Vendedor
+	ve.vendedor_key,
+	-- Campos Forma Pago
+	fp.forma_pago_key,
+	-- Campos Banco
+	bc.banco_key,
+	-- Campo Tiempo
+	tp.tiempo_key
+FROM PARCIAL.dbo.Fact_Pagos pg
+JOIN PARCIAL.dbo.Dim_Bancos bc ON pg.banco_key = bc.banco_key
+JOIN PARCIAL.dbo.Dim_FormasPago fp ON pg.forma_pago_key = fp.forma_pago_key
+JOIN PARCIAL.dbo.Dim_Vendedores ve ON pg.vendedor_key = ve.vendedor_key
+JOIN PARCIAL.dbo.DIM_TIEMPO tp ON pg.tiempo_key = tp.tiempo_key
+;) [refTable]
+where [refTable].[id_pago] = ? and [refTable].[banco_key] = ? and [refTable].[vendedor_key] = ? and [refTable].[forma_pago_key] = ? and [refTable].[tiempo_key] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="id_pago" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="vendedor_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="forma_pago_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="banco_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="tiempo_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_pago]};#{Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[banco_key]};#{Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[vendedor_key]};#{Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[forma_pago_key]};#{Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[tiempo_key]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - FACT Pagos\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input].Columns[banco_key]"
+                      cachedDataType="i4"
+                      cachedName="banco_key"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[banco_key]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">banco_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input].Columns[vendedor_key]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_key"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[vendedor_key]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">vendedor_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input].Columns[forma_pago_key]"
+                      cachedDataType="i4"
+                      cachedName="forma_pago_key"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[forma_pago_key]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">forma_pago_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input].Columns[tiempo_key]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_key"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[tiempo_key]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">tiempo_key</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input].Columns[id_pago]"
+                      cachedDataType="i4"
+                      cachedName="id_pago"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_pago]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">id_pago</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Fact_Pagos]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection1 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection1 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[id_pago]"
+                      cachedDataType="i4"
+                      cachedName="id_pago"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_pago]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[banco_key]"
+                      cachedDataType="i4"
+                      cachedName="banco_key"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[banco_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[banco_key]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[vendedor_key]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_key"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vendedor_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[vendedor_key]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[forma_pago_key]"
+                      cachedDataType="i4"
+                      cachedName="forma_pago_key"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forma_pago_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[forma_pago_key]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[tiempo_key]"
+                      cachedDataType="i4"
+                      cachedName="tiempo_key"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tiempo_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[tiempo_key]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fecha]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[monto_pago]"
+                      cachedDataType="numeric"
+                      cachedName="monto_pago"
+                      cachedPrecision="18"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_pago]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[moneda_pago]"
+                      cachedDataType="i4"
+                      cachedName="moneda_pago"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[moneda_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_pago]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[cambio_pago]"
+                      cachedDataType="numeric"
+                      cachedName="cambio_pago"
+                      cachedPrecision="18"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cambio_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[cambio_pago]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[monto_sol]"
+                      cachedDataType="numeric"
+                      cachedName="monto_sol"
+                      cachedPrecision="18"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_sol]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_sol]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[monto_dolar]"
+                      cachedDataType="numeric"
+                      cachedName="monto_dolar"
+                      cachedPrecision="18"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_dolar]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_dolar]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[operacion]"
+                      cachedDataType="i4"
+                      cachedName="operacion"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[operacion]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[operacion]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vendedor_key]"
+                      dataType="i4"
+                      name="vendedor_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forma_pago_key]"
+                      dataType="i4"
+                      name="forma_pago_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[banco_key]"
+                      dataType="i4"
+                      name="banco_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[tiempo_key]"
+                      dataType="i4"
+                      name="tiempo_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[id_pago]"
+                      dataType="i4"
+                      name="id_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[fecha]"
+                      dataType="dbTimeStamp"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_pago]"
+                      dataType="numeric"
+                      name="monto_pago"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[moneda_pago]"
+                      dataType="i4"
+                      name="moneda_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[cambio_pago]"
+                      dataType="numeric"
+                      name="cambio_pago"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_sol]"
+                      dataType="numeric"
+                      name="monto_sol"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[monto_dolar]"
+                      dataType="numeric"
+                      name="monto_dolar"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[operacion]"
+                      dataType="i4"
+                      name="operacion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task - FACT Pagos\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+	pg.pago id_pago,
+	dcb.banco_key,
+	dve.vendedor_key,
+	dfp.forma_pago_key,
+	dtm.tiempo_key,
+	pg.fechaPago fecha,
+	pg.montoPago monto_pago,
+	pg.monedaPago moneda_pago,
+	pg.cambioPago cambio_pago,
+	pg.montoSol monto_sol,
+	pg.montoDolar monto_dolar,
+	pg.operacion
+FROM RETAIL.pa.pago pg
+JOIN RETAIL.ma.cuentaBanco cb ON pg.cuentaBanco = cb.cuentaBanco
+JOIN PARCIAL.dbo.Dim_Bancos dcb ON cb.cuentaBanco = dcb.id_cuenta
+
+JOIN RETAIL.ma.vendedor ve ON pg.vendedor = ve.vendedor
+JOIN PARCIAL.dbo.Dim_Vendedores dve ON ve.vendedor = dve.id_vendedor
+
+JOIN RETAIL.ma.formaPago fp ON pg.formaPago = fp.formaPago
+JOIN PARCIAL.dbo.Dim_FormasPago dfp ON fp.formaPago = dfp.id_forma_pago
+
+JOIN PARCIAL.dbo.DIM_TIEMPO dtm ON pg.fechaPago = dtm.fecha
+;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Data Connection]"
+                  connectionManagerRefId="Package.ConnectionManagers[Data Connection]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_pago]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[id_pago]"
+                      name="id_pago"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[banco_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[banco_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[banco_key]"
+                      name="banco_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[vendedor_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vendedor_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[vendedor_key]"
+                      name="vendedor_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[forma_pago_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forma_pago_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[forma_pago_key]"
+                      name="forma_pago_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[tiempo_key]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tiempo_key]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[tiempo_key]"
+                      name="tiempo_key"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[fecha]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[fecha]"
+                      name="fecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_pago]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_pago]"
+                      name="monto_pago"
+                      precision="18"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_pago]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[moneda_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[moneda_pago]"
+                      name="moneda_pago"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[cambio_pago]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cambio_pago]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[cambio_pago]"
+                      name="cambio_pago"
+                      precision="18"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_sol]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_sol]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_sol]"
+                      name="monto_sol"
+                      precision="18"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_dolar]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_dolar]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[monto_dolar]"
+                      name="monto_dolar"
+                      precision="18"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[operacion]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[operacion]"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].Columns[operacion]"
+                      name="operacion"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[id_pago]"
+                      dataType="i4"
+                      name="id_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[banco_key]"
+                      dataType="i4"
+                      name="banco_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[vendedor_key]"
+                      dataType="i4"
+                      name="vendedor_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[forma_pago_key]"
+                      dataType="i4"
+                      name="forma_pago_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[tiempo_key]"
+                      dataType="i4"
+                      name="tiempo_key" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[fecha]"
+                      dataType="dbTimeStamp"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_pago]"
+                      dataType="numeric"
+                      name="monto_pago"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[moneda_pago]"
+                      dataType="i4"
+                      name="moneda_pago" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[cambio_pago]"
+                      dataType="numeric"
+                      name="cambio_pago"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_sol]"
+                      dataType="numeric"
+                      name="monto_sol"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[monto_dolar]"
+                      dataType="numeric"
+                      name="monto_dolar"
+                      precision="18"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[operacion]"
+                      dataType="i4"
+                      name="operacion" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_pago]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[id_pago]"
+                      name="id_pago" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[banco_key]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[banco_key]"
+                      name="banco_key" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vendedor_key]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[vendedor_key]"
+                      name="vendedor_key" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forma_pago_key]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[forma_pago_key]"
+                      name="forma_pago_key" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tiempo_key]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[tiempo_key]"
+                      name="tiempo_key" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[fecha]"
+                      name="fecha" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_pago]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_pago]"
+                      name="monto_pago"
+                      precision="18"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[moneda_pago]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[moneda_pago]"
+                      name="moneda_pago" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cambio_pago]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[cambio_pago]"
+                      name="cambio_pago"
+                      precision="18"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_sol]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_sol]"
+                      name="monto_sol"
+                      precision="18"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_dolar]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[monto_dolar]"
+                      name="monto_dolar"
+                      precision="18"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[operacion]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[operacion]"
+                      name="operacion" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task - FACT Pagos.Paths[Lookup No Match Output]"
+              endId="Package\Data Flow Task - FACT Pagos\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Data Flow Task - FACT Pagos\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Data Flow Task - FACT Pagos.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task - FACT Pagos\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task - FACT Pagos\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{48B14F03-8DA8-41EB-B91C-2A0A608B87B1}"
+      DTS:From="Package\Data Flow Task - DIM Bancos"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task - DIM Formas Pago" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{87ED45B8-8DA5-4D72-8D6A-325121006919}"
+      DTS:From="Package\Data Flow Task - DIM Formas Pago"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Data Flow Task - DIM Vendedores" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{39A20D3F-B7FE-4A11-AFED-75B83DA05B62}"
+      DTS:From="Package\Data Flow Task - DIM Vendedores"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Data Flow Task - FACT Pagos" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Data Flow Task - DIM Bancos"
+          TopLeft="125,95" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Data Flow Task - DIM Formas Pago"
+          TopLeft="217,203" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="234,137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="106,66"
+              Start="0,0"
+              End="106,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29"
+                    Point2="0,33"
+                    Point3="4,33" />
+                  <mssgle:LineSegment
+                    End="102,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="102,33"
+                    Point2="106,33"
+                    Point3="106,37" />
+                  <mssgle:LineSegment
+                    End="106,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Data Flow Task - DIM Vendedores"
+          TopLeft="272,344" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="340,245">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="52,99"
+              Start="0,0"
+              End="52,91.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.5"
+                    Point2="0,49.5"
+                    Point3="4,49.5" />
+                  <mssgle:LineSegment
+                    End="48,49.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="48,49.5"
+                    Point2="52,49.5"
+                    Point3="52,53.5" />
+                  <mssgle:LineSegment
+                    End="52,91.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="218,42"
+          Id="Package\Data Flow Task - FACT Pagos"
+          TopLeft="397,486" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="392,386">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114,100"
+              Start="0,0"
+              End="114,92.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,46"
+                    Point2="0,50"
+                    Point3="4,50" />
+                  <mssgle:LineSegment
+                    End="110,50" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110,50"
+                    Point2="114,50"
+                    Point3="114,54" />
+                  <mssgle:LineSegment
+                    End="114,92.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task - DIM Bancos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task - DIM Bancos\OLE DB Source"
+          TopLeft="245,110" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task - DIM Bancos\Lookup"
+          TopLeft="398,201" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Bancos.Paths[OLE DB Source Output]"
+          TopLeft="320,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.5,49"
+              Start="0,0"
+              End="134.5,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
+                  <mssgle:LineSegment
+                    End="130.5,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.5,24.5"
+                    Point2="134.5,24.5"
+                    Point3="134.5,28.5" />
+                  <mssgle:LineSegment
+                    End="134.5,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task - DIM Bancos\OLE DB Destination"
+          TopLeft="520,310" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Bancos.Paths[Lookup No Match Output]"
+          TopLeft="454.5,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151,67"
+              Start="0,0"
+              End="151,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
+                  <mssgle:LineSegment
+                    End="147,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147,33.5"
+                    Point2="151,33.5"
+                    Point3="151,37.5" />
+                  <mssgle:LineSegment
+                    End="151,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="19.69361328125,38.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Bancos\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Bancos\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Dim_Bancos]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Bancos\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task - DIM Formas Pago">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task - DIM Formas Pago\Lookup"
+          TopLeft="398,201" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination"
+          TopLeft="520,310" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task - DIM Formas Pago\OLE DB Source"
+          TopLeft="245,110" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Formas Pago.Paths[Lookup No Match Output]"
+          TopLeft="454.5,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151,67"
+              Start="0,0"
+              End="151,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
+                  <mssgle:LineSegment
+                    End="147,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147,33.5"
+                    Point2="151,33.5"
+                    Point3="151,37.5" />
+                  <mssgle:LineSegment
+                    End="151,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="19.69361328125,38.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Formas Pago.Paths[OLE DB Source Output]"
+          TopLeft="320,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.5,49"
+              Start="0,0"
+              End="134.5,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
+                  <mssgle:LineSegment
+                    End="130.5,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.5,24.5"
+                    Point2="134.5,24.5"
+                    Point3="134.5,28.5" />
+                  <mssgle:LineSegment
+                    End="134.5,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Formas Pago\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Dim_FormasPago]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Formas Pago\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Formas Pago\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task - DIM Vendedores">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task - DIM Vendedores\Lookup"
+          TopLeft="398,201" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task - DIM Vendedores\OLE DB Destination"
+          TopLeft="520,310" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task - DIM Vendedores\OLE DB Source"
+          TopLeft="245,110" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Vendedores.Paths[Lookup No Match Output]"
+          TopLeft="454.5,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="151,67"
+              Start="0,0"
+              End="151,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
+                  <mssgle:LineSegment
+                    End="147,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="147,33.5"
+                    Point2="151,33.5"
+                    Point3="151,37.5" />
+                  <mssgle:LineSegment
+                    End="151,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="19.69361328125,38.5,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task - DIM Vendedores.Paths[OLE DB Source Output]"
+          TopLeft="320,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="134.5,49"
+              Start="0,0"
+              End="134.5,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.5"
+                    Point2="0,24.5"
+                    Point3="4,24.5" />
+                  <mssgle:LineSegment
+                    End="130.5,24.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="130.5,24.5"
+                    Point2="134.5,24.5"
+                    Point3="134.5,28.5" />
+                  <mssgle:LineSegment
+                    End="134.5,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Vendedores\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[Dim_Vendedores]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Vendedores\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - DIM Vendedores\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task - FACT Pagos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task - FACT Pagos\OLE DB Source"
+          TopLeft="179,108" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Data Flow Task - FACT Pagos\Lookup"
+          TopLeft="316,263" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - FACT Pagos.Paths[OLE DB Source Output]"
+          TopLeft="254,150">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.5,113"
+              Start="0,0"
+              End="118.5,105.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.5"
+                    Point2="0,56.5"
+                    Point3="4,56.5" />
+                  <mssgle:LineSegment
+                    End="114.5,56.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.5,56.5"
+                    Point2="118.5,56.5"
+                    Point3="118.5,60.5" />
+                  <mssgle:LineSegment
+                    End="118.5,105.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task - FACT Pagos\OLE DB Destination"
+          TopLeft="505,417" />
+        <EdgeLayout
+          Id="Package\Data Flow Task - FACT Pagos.Paths[Lookup No Match Output]"
+          TopLeft="372.5,305">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="218,112"
+              Start="0,0"
+              End="218,104.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52"
+                    Point2="0,56"
+                    Point3="4,56" />
+                  <mssgle:LineSegment
+                    End="214,56" />
+                  <mssgle:CubicBezierSegment
+                    Point1="214,56"
+                    Point2="218,56"
+                    Point3="218,60" />
+                  <mssgle:LineSegment
+                    End="218,104.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="53.19361328125,61,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - FACT Pagos\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - FACT Pagos\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task - FACT Pagos\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
